@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32602.215
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZLIB_decompressor", "ZLIB_decompressor.csproj", "{6E299C80-45F4-497E-8451-63B2CD554069}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6E299C80-45F4-497E-8451-63B2CD554069}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E299C80-45F4-497E-8451-63B2CD554069}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E299C80-45F4-497E-8451-63B2CD554069}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E299C80-45F4-497E-8451-63B2CD554069}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E6AA5D12-2AF3-4732-A571-6EE66C6ED4B4}
+	EndGlobalSection
+EndGlobal

@@ -17,11 +17,10 @@ namespace ZLIB_decompressor
                 return;
             }
 
-            // Storing the values specified in each of the arguements
-            // as variables
-            string in_file = (args[0]);
+            // Storing the values specified in each of the arguements as variables
+            string in_file = args[0];
             long header_start = Convert.ToInt64(args[1]);
-            string out_file = (args[2]);
+            string out_file = args[2];
 
             // Open the input file and create the output file specified in
             // arg[0] and arg[2] in two separate filestreams

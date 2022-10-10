@@ -12,7 +12,7 @@ namespace ZLIB_decompressor
             // and if its less than 3, then terminate the program
             if (args.Length != 3)
             {
-                Console.WriteLine("No arguments specified");
+                Console.WriteLine("Error: Enough arguments not specified");
                 Console.ReadLine();
                 return;
             }
@@ -22,6 +22,14 @@ namespace ZLIB_decompressor
             long header_start = Convert.ToInt64(args[1]);
             string out_file = args[2];
 
+            // Check if the specified in_file in args[0] exists.
+            if (!File.Exists(in_file))
+            {
+                Console.WriteLine("Error: Specified input file does not exist");
+                Console.ReadLine();
+                return;
+            }
+
             // Open the input file and create the output file specified in
             // arg[0] and arg[2] in two separate filestreams
             FileStream InFileStream = new FileStream(in_file, FileMode.Open, FileAccess.Read);
@@ -30,12 +38,15 @@ namespace ZLIB_decompressor
             // Seek to the byte value specified in arg[1]
             InFileStream.Seek(header_start, SeekOrigin.Begin);
 
+
             // Open the input file inside a Inflatter input stream and copy the
             // decompressed zlib data into the output file
             InflaterInputStream ZLib_decmp = new InflaterInputStream(InFileStream);
             ZLib_decmp.CopyTo(OutFileStream);
 
+            ZLib_decmp.Close();
+            OutFileStream.Close();
+            InFileStream.Close();
         }
     }
 }
-

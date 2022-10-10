@@ -1,6 +1,7 @@
 # ZLIB_decompressor
 
 This app can decompress ZLIB compressed data stored in game resource archive files. 
+<br>
 <br>Do note that the app can only decompress one continuous ZLIB chunk and if you want to decompress all of the chunks in the file, then you have to specify the header start position of the next ZLIB chunk and decompress that separately.
 
 ## Instructions

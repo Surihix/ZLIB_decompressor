@@ -13,6 +13,9 @@ namespace ZLIB_decompressor
             if (args.Length != 3)
             {
                 Console.WriteLine("Error: Enough arguments not specified");
+                Console.WriteLine("");
+                Console.WriteLine("Specify arguments like this:");
+                Console.WriteLine("ZLIB_decompressor [file.extension] [byte-position] [outputfile.extension]");
                 Console.ReadLine();
                 return;
             }
@@ -32,21 +35,22 @@ namespace ZLIB_decompressor
 
             // Open the input file and create the output file specified in
             // arg[0] and arg[2] in two separate filestreams
-            FileStream InFileStream = new FileStream(in_file, FileMode.Open, FileAccess.Read);
-            FileStream OutFileStream = new FileStream(out_file, FileMode.OpenOrCreate);
+            using (FileStream InFileStream = new FileStream(in_file, FileMode.Open, FileAccess.Read))
+            {
+                using (FileStream OutFileStream = new FileStream(out_file, FileMode.OpenOrCreate))
+                {
+                    // Seek to the byte value specified in arg[1]
+                    InFileStream.Seek(header_start, SeekOrigin.Begin);
 
-            // Seek to the byte value specified in arg[1]
-            InFileStream.Seek(header_start, SeekOrigin.Begin);
+                    // Open the input file inside a Inflatter input stream and copy the
+                    // decompressed zlib data into the output file
+                    using (InflaterInputStream ZLib_decmp = new InflaterInputStream(InFileStream))
+                    {
+                        ZLib_decmp.CopyTo(OutFileStream);
 
-
-            // Open the input file inside a Inflatter input stream and copy the
-            // decompressed zlib data into the output file
-            InflaterInputStream ZLib_decmp = new InflaterInputStream(InFileStream);
-            ZLib_decmp.CopyTo(OutFileStream);
-
-            ZLib_decmp.Close();
-            OutFileStream.Close();
-            InFileStream.Close();
+                    }
+                }
+            }
         }
     }
 }

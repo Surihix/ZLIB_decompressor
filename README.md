@@ -6,7 +6,7 @@ This app can decompress ZLIB compressed data stored in game resource archive fil
 
 ## Instructions
 Place the file that has the ZLIB compressed data next to the app and open the app through command prompt with the following commandline arguements:
-<br>```ZLIB_decompressor [file.extension] [byte-number] [outputfile.extension]```
+<br>```ZLIB_decompressor [file.extension] [byte-position] [outputfile.extension]```
 <br>
 <br>For Example:
 <br>```ZLIB_decompressor myfile.bin 60 myfile_decmp.bin```

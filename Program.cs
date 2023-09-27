@@ -35,21 +35,24 @@ namespace ZLIB_decompressor
                     return;
                 }
 
+                // Check if the outFile from args[0] 
+                // exists and if it exists, then
+                // delete the file
+                if (File.Exists(outFile))
+                {
+                    File.Delete(outFile);
+                }
+
                 Console.WriteLine("Decompressing....");
 
                 // Open the input file and create the output file specified in
-                // arg[0] and arg[2] in two separate filestreams
+                // args[0] and args[2] in two separate filestreams
                 using (FileStream inFileStream = new FileStream(inFile, FileMode.Open, FileAccess.Read))
                 {
-                    if (File.Exists(outFile))
-                    {
-                        File.Delete(outFile);
-                    }
-
                     using (FileStream outFileStream = new FileStream(outFile, FileMode.OpenOrCreate, FileAccess.Write))
                     {
                         // Seek to the specified byte position
-                        // from arg[1]
+                        // from args[1]
                         inFileStream.Seek(headerStart, SeekOrigin.Begin);
 
                         // Attach outfileStream to decompressor

@@ -17,14 +17,22 @@ namespace ZLIB_decompressor
                     Console.WriteLine("Error: Enough arguments not specified");
                     Console.WriteLine("");
                     Console.WriteLine("Specify arguments like this:");
-                    Console.WriteLine("ZLIB_decompressor [file.extension] [byte-position] [outputfile.extension]");
+                    Console.WriteLine("ZLIB_decompressor \"infile\" byte-position \"outputfile\"");
                     Console.ReadLine();
                     return;
                 }
 
                 // Storing the values specified in each of the arguements as variables
                 string inFile = args[0];
-                long headerStart = Convert.ToInt64(args[1]);
+                long headerStart;
+                if (args[1].StartsWith("0x"))
+                {
+                    headerStart = Convert.ToInt64(args[1], 16);
+                }
+                else
+                {
+                    headerStart = Convert.ToInt64(args[1]);
+                }                 
                 string outFile = args[2];
 
                 // Check if the specified in_file in args[0] exists.
@@ -55,15 +63,15 @@ namespace ZLIB_decompressor
                         // from args[1]
                         inFileStream.Seek(headerStart, SeekOrigin.Begin);
 
-                        // Attach outfileStream to decompressor
-                        // and copy the inFileStream into the
-                        // decompressor
+                        // Attach inFileStream to decompressor
+                        // and copy from it to the
+                        // outfileStream
                         // This will decompress the zlib data and 
                         // the decompressed data will be stored 
                         // inside the specified outFile
-                        using (ZlibStream decompressor = new ZlibStream(outFileStream, CompressionMode.Decompress))
+                        using (ZlibStream decompressor = new ZlibStream(inFileStream, CompressionMode.Decompress))
                         {
-                            inFileStream.CopyTo(decompressor);
+                            decompressor.CopyTo(outFileStream);
                         }
                     }
                 }
